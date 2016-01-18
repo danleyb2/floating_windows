@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Floating Windows</title>
+    <script type="text/javascript" src="js/fw.min.js"></script>
+    <link rel="stylesheet" href="css/fw.css">
+</head>
+<body>
+
+<button id="float">Float window</button>
+
+<button id="float_dont_dimiss">Float For Ok</button>
+
+<button id="float_non_blocking">Non Blocking</button>
+
+<button id="float_xy">Float At Position</button>
+<input type="text" placeholder="X pos" id="float_position_x">
+<input type="text" placeholder="Y pos" id="float_position_y">
+
+
+
+<button id="float_timeout">Float for </button>
+<label for="float_timeout_input">Float timeout</label><input type="text" id="float_timeout_input"> Seconds
+
+
+
+
+<h1 style="">CREATING FLOATING WINDOWS COULDN'T BE ANY EASIER..</h1>
+
+</body>
+<script>
+
+    q=myQuery();
+
+    var floatingWindow1=new FW();
+    floatingWindow1.html('<div>Hey look, i am floating!!!.... </div>');
+
+    floatingWindow1.css({
+        'backgroundColor':'red',
+        'width':'300px',
+        'height':'200px',
+        'margin':'100px auto',
+        'padding':'10px',
+        'font-size':'20px',
+        'border-radius':'5px'
+
+    },floatingWindow1.cdom());
+
+
+    q.$('#float_dont_dimiss').onclick= function (e) {
+        e.preventDefault();
+        floatingWindow1.dismissable(false);
+        floatingWindow1.show();
+    };
+    q.$('#float').onclick= function (e) {
+        e.preventDefault();
+        floatingWindow1.show();
+    };
+    q.$('#float_non_blocking').onclick= function (e) {
+        e.preventDefault();
+        if(floatingWindow1.displaying()){
+            floatingWindow1.remove()
+        }else {
+
+            floatingWindow1.blocking(false);
+            floatingWindow1.show();
+        }
+    };
+    q.$('#float_xy').onclick= function (e) {
+        e.preventDefault();
+        floatingWindow1.show();
+    };
+    q.$('#float_timeout').onclick= function (e) {
+        e.preventDefault();
+
+        var timeout= q.$('#float_timeout_input').value.trim();
+        if(timeout==''){
+            q.$('#float_timeout_input').style.backgroundColor='red';
+            console.log('please a provide a time out value')
+        }else{
+            floatingWindow1.show(Number(timeout));
+        }
+    };
+
+
+
+    //floatingWindow2=new FW();
+
+
+
+
+    //floatingWindow1.show(5);
+    //floatingWindow1.hide()
+
+
+</script>
+</html>
